@@ -56,7 +56,7 @@ def getDate(date):
     # return time.strftime("%x") #returns current date in month/day/year format
 
 def nbaScores(date,league):
-    maxTeamLength = 14
+    maxTeamLength = 14 #Oklahoma City is the longest team city name
     spacesNeeded = 0
     try:
         count = 0
