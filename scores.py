@@ -2,14 +2,15 @@ import sys
 import argparse
 import requests
 import pprint
+import datetime
 
 def main():
     parser = argparse.ArgumentParser("See live scores in your terminal")
     parser.add_argument("-nfl", action='store_true', help="NFL flag") #action='store_true' allows flag without argument
     parser.add_argument("-nhl", action='store_true', help="NHL flag")
-    parser.add_argument("-nba", action='store_true', help="NBA flag")
+    parser.add_argument("-nba", help="NBA flag") #argument must be in mm/dd/yyyy format
     args = parser.parse_args()
-    if len(sys.argv) > 2:
+    if len(sys.argv) > 3:
         parser.print_help()
     elif args.nfl:
         print("You want scores for the NFL")
@@ -17,16 +18,50 @@ def main():
         print("You want scores for the NHL")
     elif args.nba:
         # print("You want scores for the NBA")
-        nbaScores("nba")
+        nbaScores(args.nba,"nba")
 
-def nbaScores(league):
+
+def checkDate(date):
     count = 0
+    month = ""
+    day = ""
+    year = ""
+    for c in date:
+        if count == 0:
+            if c == '/':
+                count+=1
+            else:
+                month+=c
+        elif count == 1:
+            if c == '/':
+                count+=1
+            else:
+                day+=c
+        elif count == 2:
+            if c == '/':
+                count+=1
+            else:
+                year+=c
+    if count > 2 or int(month) > 12 or int(month) < 1 or int(day) < 1 or int(day) > 31:
+        return False
+    return True
+
+
+def getDate(date):
+    if checkDate(date):
+        return date
+    else:
+        print("The date provided is not valid")
+        exit(0)
+    # return time.strftime("%x") #returns current date in month/day/year format
+
+def nbaScores(date,league):
     try:
+        count = 0
         # url = 'http://sports.espn.go.com/%s/bottomline/scores' % league #probably not using this for NBA
         ###
-        # url = "http://stats.nba.com/stats/scoreboardV2?DayOffset=0&LeagueID=00&gameDate=02%2F04%2F2016" #or this one either
         headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0'}
-        url = "http://stats.nba.com/stats/scoreboard/?GameDate=02/6/2016&LeagueID=00&DayOffset=0" #02/4/2016 will have to be replaced with current date
+        url = "http://stats.nba.com/stats/scoreboard/?GameDate=%s&LeagueID=00&DayOffset=0" % getDate(date)
         response = requests.get(url, headers=headers)
         response.raise_for_status()
         data = response.json()['resultSets'][1]['rowSet']
