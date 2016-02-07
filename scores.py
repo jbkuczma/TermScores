@@ -42,7 +42,7 @@ def checkDate(date):
                 count+=1
             else:
                 year+=c
-    if count > 2 or int(month) > 12 or int(month) < 1 or int(day) < 1 or int(day) > 31:
+    if count > 2 or int(month) > 12 or int(month) < 1 or int(day) < 1 or int(day) > 31 or int(year) < 1947: #unsure about year cutoff. this seems to be as far back as possible
         return False
     return True
 
@@ -56,6 +56,8 @@ def getDate(date):
     # return time.strftime("%x") #returns current date in month/day/year format
 
 def nbaScores(date,league):
+    maxTeamLength = 14
+    spacesNeeded = 0
     try:
         count = 0
         # url = 'http://sports.espn.go.com/%s/bottomline/scores' % league #probably not using this for NBA
@@ -89,10 +91,12 @@ def nbaScores(date,league):
                 finalScore = 0
             else:
                 finalScore = i[21]
-            pp.pprint(team + ": " + str(q1Score) +"|" + str(q2Score) + "|" + str(q3Score) + "|" + str(q4Score) + " => " + str(finalScore)) #testing
+            if len(team) < maxTeamLength:
+                spacesNeeded = maxTeamLength - len(team)
+            pp.pprint(team + ":" + " " * spacesNeeded + str(q1Score) +"|" + str(q2Score) + "|" + str(q3Score) + "|" + str(q4Score) + " => " + str(finalScore)) #testing
             count+=1
             if count % 2 == 0:
-                print("==============")
+                print("===================================")
         # print(data)
         # pp = pprint.PrettyPrinter(indent=4) #testing
         # pp.pprint(data) #testing
