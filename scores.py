@@ -3,6 +3,7 @@ import argparse
 import requests
 import pprint
 import datetime
+import colors
 
 def main():
     parser = argparse.ArgumentParser("See live scores in your terminal")
@@ -15,6 +16,9 @@ def main():
     elif args.nfl:
         print("You want scores for the NFL")
     elif args.nhl:
+        #http://live.nhle.com/GameData/GCScoreboard/2016-02-09.jsonp #date is yyyy-mm-dd
+        #http://live.nhle.com/GameData/RegularSeasonScoreboardv3.jsonp?loadScoreboard=?
+        #http://live.nhle.com/GameData/RegularSeasonScoreboardv3.jsonp?loadScoreboard=jQuery110105207217424176633_1428694268811&_=1428694268812
         print("You want scores for the NHL")
     elif args.nba:
         # print("You want scores for the NBA")
@@ -96,7 +100,7 @@ def nbaScores(date,league):
             pp.pprint(team + ":" + " " * spacesNeeded + str(q1Score) +"|" + str(q2Score) + "|" + str(q3Score) + "|" + str(q4Score) + " => " + str(finalScore)) #testing
             count+=1
             if count % 2 == 0:
-                print("===================================")
+                print(colors.bcolors.OKGREEN + "===================================" + colors.bcolors.ENDC)
         # print(data)
         # pp = pprint.PrettyPrinter(indent=4) #testing
         # pp.pprint(data) #testing
