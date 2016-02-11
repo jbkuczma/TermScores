@@ -75,9 +75,9 @@ def makeNHLDate(date): #nhl takes date in a different format. same code as check
                     count+=1
                 else:
                     year+=c
-        if int(day) >= 1 or int(day) <= 9:
+        if int(day) >= 1 and int(day) <= 9:
             day = str(0) + day
-        if int(month) >= 1 or int(month) <= 9:
+        if int(month) >= 1 and int(month) <= 9:
             month = str(0) + month
         return year + "-" + month + "-" + day
     else:
