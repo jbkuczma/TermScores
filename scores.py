@@ -148,10 +148,37 @@ def nhlScores(date,league):
         data = response.text
         data = data.replace('loadScoreboard(', '')
         data = data[:-2]
-
         data = json.loads(data)
-        pp = pprint.PrettyPrinter(indent=4) #for testing
-        pp.pprint(data) #for testing
+        pp = pprint.PrettyPrinter(indent=4)
+        # pp.pprint(data) #for testing
+        for game in range(0,len(data)):
+            try:
+                homeTeam = data['games'][game]['htn']
+                awayTeam = data['games'][game]['atn']
+                homeTeamAbbreviation = data['games'][game]['hta']
+                awayTeamAbbreviation = data['games'][game]['ata']
+                homeTeamScore = data['games'][game]['hts']
+                awayTeamScore = data['games'][game]['ats']
+                temp = data['games'][game]['rl']
+                if temp == False: #i'm guessing this is if the game has started yet
+                    homeTeamShots = 0
+                    awayTeamShots = 0
+                    homeTeamScore = 0
+                    awayTeamScore = 0
+                    period = data['games'][game]['bs']
+                else:
+                    homeTeamShots = data['games'][game]['htsog']
+                    awayTeamShots = data['games'][game]['atsog']
+                    period = data['games'][game]['bsc'] #unsure
+                pp.pprint(awayTeam + " vs " + homeTeam)
+                pp.pprint(awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots))
+                pp.pprint(homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots))
+                pp.pprint("Period: " + str(period))
+                pp.pprint("===================")
+            except IndexError:
+                break
+        # test = data['games'][0]
+        # pp.pprint(test)
     except Exception as e:
         print(e)
 
