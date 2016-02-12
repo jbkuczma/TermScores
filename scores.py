@@ -154,17 +154,18 @@ def nhlScores(date,league):
                 homeTeamAbbreviation = data['games'][game]['hta']
                 awayTeamAbbreviation = data['games'][game]['ata']
                 gameState = data['games'][game]['bsc']
+                period = data['games'][game]['bs']
                 if gameState == 'progress' or 'final':
-                    homeTeamScore = data['games'][game]['hts']
-                    awayTeamScore = data['games'][game]['ats']
-                    homeTeamShots = data['games'][game]['htsog']
-                    awayTeamShots = data['games'][game]['atsog']
-                    period = data['games'][game]['bs']
-                else: #game hasn't started
-                    homeTeamScore = 0
-                    awayTeamScore = 0
-                    homeTeamShots = 0
-                    awayTeamShots = 0
+                    try:
+                        homeTeamShots = data['games'][game]['htsog']
+                        awayTeamShots = data['games'][game]['atsog']
+                        homeTeamScore = data['games'][game]['hts']
+                        awayTeamScore = data['games'][game]['ats']
+                    except Exception as e: #if the game hasn't started these would not return a value so we need to set them to 0
+                        homeTeamShots = 0
+                        awayTeamShots = 0
+                        homeTeamScore = 0
+                        awayTeamScore = 0
                 print(colors.bcolors.WARNING + awayTeam + " vs " + homeTeam + colors.bcolors.ENDC)
                 if awayTeamScore > homeTeamScore:
                     print(colors.bcolors.OKGREEN + awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots) + colors.bcolors.ENDC)
