@@ -166,10 +166,17 @@ def nhlScores(date,league):
                     homeTeamShots = 0
                     awayTeamShots = 0
                 print(colors.bcolors.WARNING + awayTeam + " vs " + homeTeam + colors.bcolors.ENDC)
-                pp.pprint(awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots))
-                pp.pprint(homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots))
-                pp.pprint("Period: " + str(period))
-                pp.pprint("===================")
+                if awayTeamScore > homeTeamScore:
+                    print(colors.bcolors.OKGREEN + awayTeamAbbreviation + " => " + str(awayTeamScore) + colors.bcolors.ENDC + "| Shots: " + str(awayTeamShots))
+                    print(homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots))
+                elif homeTeamScore > awayTeamScore:
+                    print(awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots))
+                    print(colors.bcolors.OKGREEN + homeTeamAbbreviation + " => " + str(homeTeamScore) + colors.bcolors.ENDC + "| Shots: " + str(homeTeamShots))
+                else:
+                    print(awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots))
+                    print(homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots))
+                print("Period: " + str(period))
+                print("===================")
             except IndexError:
                 break
     except Exception as e:
