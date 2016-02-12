@@ -21,9 +21,7 @@ def main():
         #http://live.nhle.com/GameData/GCScoreboard/2016-02-09.jsonp #date is yyyy-mm-dd
         #http://live.nhle.com/GameData/RegularSeasonScoreboardv3.jsonp?loadScoreboard=?
         #http://live.nhle.com/GameData/RegularSeasonScoreboardv3.jsonp?loadScoreboard=jQuery110105207217424176633_1428694268811&_=1428694268812
-        # print("You want scores for the NHL")
     elif args.nba:
-        # print("You want scores for the NBA")
         nbaScores(args.nba,"nba")
 
 
@@ -139,10 +137,8 @@ def nbaScores(date,league):
 
 def nhlScores(date,league):
     try:
-        count = 0
         headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0'}
         url = "http://live.nhle.com/GameData/GCScoreboard/%s.jsonp" % makeNHLDate(date)
-
         response = requests.get(url,headers=headers)
         response.raise_for_status()
         data = response.text
@@ -157,28 +153,25 @@ def nhlScores(date,league):
                 awayTeam = data['games'][game]['atn']
                 homeTeamAbbreviation = data['games'][game]['hta']
                 awayTeamAbbreviation = data['games'][game]['ata']
-                homeTeamScore = data['games'][game]['hts']
-                awayTeamScore = data['games'][game]['ats']
-                temp = data['games'][game]['rl']
-                if temp == False: #i'm guessing this is if the game has started yet
-                    homeTeamShots = 0
-                    awayTeamShots = 0
-                    homeTeamScore = 0
-                    awayTeamScore = 0
-                    period = data['games'][game]['bs']
-                else:
+                gameState = data['games'][game]['bsc'] #i'm guessing this is if the game has started yet
+                if gameState == 'progress' or 'final':
+                    homeTeamScore = data['games'][game]['hts']
+                    awayTeamScore = data['games'][game]['ats']
                     homeTeamShots = data['games'][game]['htsog']
                     awayTeamShots = data['games'][game]['atsog']
-                    period = data['games'][game]['bsc'] #unsure
-                pp.pprint(awayTeam + " vs " + homeTeam)
+                    period = data['games'][game]['bs']
+                else: #game hasn't started
+                    homeTeamScore = 0
+                    awayTeamScore = 0
+                    homeTeamShots = 0
+                    awayTeamShots = 0
+                print(colors.bcolors.WARNING + awayTeam + " vs " + homeTeam + colors.bcolors.ENDC)
                 pp.pprint(awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots))
                 pp.pprint(homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots))
                 pp.pprint("Period: " + str(period))
                 pp.pprint("===================")
             except IndexError:
                 break
-        # test = data['games'][0]
-        # pp.pprint(test)
     except Exception as e:
         print(e)
 
