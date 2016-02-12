@@ -147,7 +147,7 @@ def nhlScores(date,league):
         data = json.loads(data)
         pp = pprint.PrettyPrinter(indent=4)
         # pp.pprint(data) #for testing
-        for game in range(0,len(data)):
+        for game in range(0,15): #worst case there are 15 games being played. unsure how else to determine
             try:
                 homeTeam = data['games'][game]['htn']
                 awayTeam = data['games'][game]['atn']
@@ -167,11 +167,11 @@ def nhlScores(date,league):
                     awayTeamShots = 0
                 print(colors.bcolors.WARNING + awayTeam + " vs " + homeTeam + colors.bcolors.ENDC)
                 if awayTeamScore > homeTeamScore:
-                    print(colors.bcolors.OKGREEN + awayTeamAbbreviation + " => " + str(awayTeamScore) + colors.bcolors.ENDC + "| Shots: " + str(awayTeamShots))
+                    print(colors.bcolors.OKGREEN + awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots) + colors.bcolors.ENDC)
                     print(homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots))
                 elif homeTeamScore > awayTeamScore:
                     print(awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots))
-                    print(colors.bcolors.OKGREEN + homeTeamAbbreviation + " => " + str(homeTeamScore) + colors.bcolors.ENDC + "| Shots: " + str(homeTeamShots))
+                    print(colors.bcolors.OKGREEN + homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots) + colors.bcolors.ENDC)
                 else:
                     print(awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots))
                     print(homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots))
