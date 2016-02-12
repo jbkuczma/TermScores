@@ -153,7 +153,7 @@ def nhlScores(date,league):
                 awayTeam = data['games'][game]['atn']
                 homeTeamAbbreviation = data['games'][game]['hta']
                 awayTeamAbbreviation = data['games'][game]['ata']
-                gameState = data['games'][game]['bsc'] #i'm guessing this is if the game has started yet
+                gameState = data['games'][game]['bsc']
                 if gameState == 'progress' or 'final':
                     homeTeamScore = data['games'][game]['hts']
                     awayTeamScore = data['games'][game]['ats']
