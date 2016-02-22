@@ -124,13 +124,16 @@ def nbaScores(date,league):
     try:
         headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0'}
         # url = 'http://sports.espn.go.com/%s/bottomline/scores' % league
-        url = 'http://espn.go.com/nba/scoreboard/_/date/%s' % makeNBADate(date) #date must be yyyymmdd
+        # url = 'http://espn.go.com/nba/scoreboard/_/date/%s' % makeNBADate(date) #date must be yyyymmdd
+        # probably won't use either above #
+        url = 'http://data.nba.com/data/1h/json/cms/noseason/scoreboard/%s/games.json' % makeNBADate(date)  #date must be yyyymmdd
         response = requests.get(url=url, headers=headers)
         response.raise_for_status()
         # use bs4 to parse
-        # data = response.text
-        # data = json.loads(data)
-        print(data)
+        data = response.text
+        data = json.loads(data)
+        pp = pprint.PrettyPrinter(indent=4)
+        pp.pprint(data)
     except Exception as e:
         print(e)
 
