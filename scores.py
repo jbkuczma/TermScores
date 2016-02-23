@@ -6,11 +6,10 @@ import json
 import colors
 
 def main():
-    #scores seem to be updated every 20 minutes for nba
     parser = argparse.ArgumentParser("See live scores in your terminal")
     parser.add_argument("-nfl", action='store_true', help="NFL flag") #action='store_true' allows flag without argument
-    parser.add_argument("-nhl", help="NHL flag")
-    parser.add_argument("-nba", help="NBA flag") #argument must be in mm/dd/yyyy format
+    parser.add_argument("-nhl", help="Get game scores for NHL games on given date")
+    parser.add_argument("-nba", help="Get game scores for NBA games on given date") #argument must be in mm/dd/yyyy format
     args = parser.parse_args()
     if len(sys.argv) > 3:
         parser.print_help()
@@ -18,9 +17,6 @@ def main():
         print("You want scores for the NFL")
     elif args.nhl:
         nhlScores(args.nhl,"nhl")
-        #http://live.nhle.com/GameData/GCScoreboard/2016-02-09.jsonp #date is yyyy-mm-dd
-        #http://live.nhle.com/GameData/RegularSeasonScoreboardv3.jsonp?loadScoreboard=?
-        #http://live.nhle.com/GameData/RegularSeasonScoreboardv3.jsonp?loadScoreboard=jQuery110105207217424176633_1428694268811&_=1428694268812
     elif args.nba:
         nbaScores(args.nba,"nba")
 
@@ -112,20 +108,10 @@ def makeNBADate(date):
     else:
         print("The date provided is not valid")
         exit(0)
-# def getDate(date):
-#     if checkDate(date):
-#         return date
-#     else:
-#         print("The date provided is not valid")
-#         exit(0)
-#     # return time.strftime("%x") #returns current date in month/day/year format
 
 def nbaScores(date,league):
     try:
         headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0'}
-        # url = 'http://sports.espn.go.com/%s/bottomline/scores' % league
-        # url = 'http://espn.go.com/nba/scoreboard/_/date/%s' % makeNBADate(date) #date must be yyyymmdd
-        # probably won't use either above #
         url = 'http://data.nba.com/data/1h/json/cms/noseason/scoreboard/%s/games.json' % makeNBADate(date)  #date must be yyyymmdd
         response = requests.get(url=url, headers=headers)
         response.raise_for_status()
