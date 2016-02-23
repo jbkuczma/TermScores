@@ -146,7 +146,63 @@ def nbaScores(date,league):
                 awayTeamNickName = data['sports_content']['games']['game'][game]['visitor']['nickname']
                 homeTeamAbrv = data['sports_content']['games']['game'][game]['home']['abbreviation']
                 awayTeamAbrv = data['sports_content']['games']['game'][game]['visitor']['abbreviation']
-                if int(quarterNumber) == 0:
+                try:
+                    if int(quarterNumber) == 0:
+                        h1Score = '0'
+                        h2Score = '0'
+                        h3Score = '0'
+                        h4Score = '0'
+                        hFinalScore = '0'
+                        a1Score = '0'
+                        a2Score = '0'
+                        a3Score = '0'
+                        a4Score = '0'
+                        aFinalScore = '0'
+                    elif int(quarterNumber) == 1:
+                        h1Score = data['sports_content']['games']['game'][game]['home']['linescores']['period']['score']
+                        h2Score = '0'
+                        h3Score = '0'
+                        h4Score = '0'
+                        hFinalScore = str(int(h1Score) + int(h2Score) + int(h3Score) + int(h4Score))
+                        a1Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period']['score']
+                        a2Score = '0'
+                        a3Score = '0'
+                        a4Score = '0'
+                        aFinalScore = str(int(a1Score) + int(a2Score) + int(a3Score) + int(a4Score))
+                    elif int(quarterNumber) == 2:
+                        h1Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][0]['score']
+                        h2Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][1]['score']
+                        h3Score = '0'
+                        h4Score = '0'
+                        hFinalScore = str(int(h1Score) + int(h2Score) + int(h3Score) + int(h4Score))
+                        a1Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][0]['score']
+                        a2Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][1]['score']
+                        a3Score = '0'
+                        a4Score = '0'
+                        aFinalScore = str(int(a1Score) + int(a2Score) + int(a3Score) + int(a4Score))
+                    elif int(quarterNumber) == 3:
+                        h1Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][0]['score']
+                        h2Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][1]['score']
+                        h3Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][2]['score']
+                        h4Score = '0'
+                        hFinalScore = str(int(h1Score) + int(h2Score) + int(h3Score) + int(h4Score))
+                        a1Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][0]['score']
+                        a2Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][1]['score']
+                        a3Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][2]['score']
+                        a4Score = '0'
+                        aFinalScore = str(int(a1Score) + int(a2Score) + int(a3Score) + int(a4Score))
+                    elif int(quarterNumber) == 4:
+                        h1Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][0]['score']
+                        h2Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][1]['score']
+                        h3Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][2]['score']
+                        h4Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][3]['score']
+                        hFinalScore = data['sports_content']['games']['game'][game]['home']['score']
+                        a1Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][0]['score']
+                        a2Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][1]['score']
+                        a3Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][2]['score']
+                        a4Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][3]['score']
+                        aFinalScore = data['sports_content']['games']['game'][game]['visitor']['score']
+                except ValueError as e: #if quarterNumber == ''
                     h1Score = '0'
                     h2Score = '0'
                     h3Score = '0'
@@ -157,72 +213,34 @@ def nbaScores(date,league):
                     a3Score = '0'
                     a4Score = '0'
                     aFinalScore = '0'
-                elif int(quarterNumber) == 1:
-                    h1Score = data['sports_content']['games']['game'][game]['home']['linescores']['period']['score']
-                    h2Score = '0'
-                    h3Score = '0'
-                    h4Score = '0'
-                    hFinalScore = str(int(h1Score) + int(h2Score) + int(h3Score) + int(h4Score))
-                    a1Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period']['score']
-                    a2Score = '0'
-                    a3Score = '0'
-                    a4Score = '0'
-                    aFinalScore = str(int(a1Score) + int(a2Score) + int(a3Score) + int(a4Score))
-                elif int(quarterNumber) == 2:
-                    h1Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][0]['score']
-                    h2Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][1]['score']
-                    h3Score = '0'
-                    h4Score = '0'
-                    hFinalScore = str(int(h1Score) + int(h2Score) + int(h3Score) + int(h4Score))
-                    a1Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][0]['score']
-                    a2Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][1]['score']
-                    a3Score = '0'
-                    a4Score = '0'
-                    aFinalScore = str(int(a1Score) + int(a2Score) + int(a3Score) + int(a4Score))
-                elif int(quarterNumber) == 3:
-                    h1Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][0]['score']
-                    h2Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][1]['score']
-                    h3Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][2]['score']
-                    h4Score = '0'
-                    hFinalScore = str(int(h1Score) + int(h2Score) + int(h3Score) + int(h4Score))
-                    a1Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][0]['score']
-                    a2Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][1]['score']
-                    a3Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][2]['score']
-                    a4Score = '0'
-                    aFinalScore = str(int(a1Score) + int(a2Score) + int(a3Score) + int(a4Score))
-                elif int(quarterNumber) == 4:
-                    h1Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][0]['score']
-                    h2Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][1]['score']
-                    h3Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][2]['score']
-                    h4Score = data['sports_content']['games']['game'][game]['home']['linescores']['period'][3]['score']
-                    hFinalScore = data['sports_content']['games']['game'][game]['home']['score']
-                    a1Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][0]['score']
-                    a2Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][1]['score']
-                    a3Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][2]['score']
-                    a4Score = data['sports_content']['games']['game'][game]['visitor']['linescores']['period'][3]['score']
-                    aFinalScore = data['sports_content']['games']['game'][game]['visitor']['score']
-
-                if int(quarterNumber) == 0:
+                try:
+                    if int(quarterNumber) == 0:
+                        pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
+                        pp.pprint("Tipoff at " + quarterStatus)
+                        pp.pprint("==============================")
+                    elif int(quarterNumber) >= 1 and int(quarterNumber) <= 3:
+                        pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
+                        pp.pprint(awayTeamAbrv + ' => ' + a1Score + "|" + a2Score + "|" + a3Score + "|" + a4Score + "|" + aFinalScore)
+                        pp.pprint(homeTeamAbrv + ' => ' + h1Score + "|" + h2Score + "|" + h3Score + "|" + h4Score + "|" + hFinalScore)
+                        pp.pprint(quarterStatus + ' | ' + gameClock + " remaining")
+                        pp.pprint("==============================")
+                    else:
+                        pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
+                        pp.pprint(awayTeamAbrv + ' => ' + a1Score + "|" + a2Score + "|" + a3Score + "|" + a4Score + "|" + aFinalScore)
+                        pp.pprint(homeTeamAbrv + ' => ' + h1Score + "|" + h2Score + "|" + h3Score + "|" + h4Score + "|" + hFinalScore)
+                        pp.pprint(quarterStatus)
+                        pp.pprint("==============================")
+                except ValueError as e: #if quarterNumber == ''
                     pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
+                    # pp.pprint(awayTeamAbrv + ' => ' + a1Score + "|" + a2Score + "|" + a3Score + "|" + a4Score + "|" + aFinalScore)
+                    # pp.pprint(homeTeamAbrv + ' => ' + h1Score + "|" + h2Score + "|" + h3Score + "|" + h4Score + "|" + hFinalScore)
                     pp.pprint("Tipoff at " + quarterStatus)
-                    pp.pprint("==============================")
-                elif int(quarterNumber) >= 1 and int(quarterNumber) <= 3:
-                    pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
-                    pp.pprint(awayTeamAbrv + ' => ' + a1Score + "|" + a2Score + "|" + a3Score + "|" + a4Score + "|" + aFinalScore)
-                    pp.pprint(homeTeamAbrv + ' => ' + h1Score + "|" + h2Score + "|" + h3Score + "|" + h4Score + "|" + hFinalScore)
-                    pp.pprint(quarterStatus + ' | ' + gameClock + " remaining")
-                    pp.pprint("==============================")
-                else:
-                    pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
-                    pp.pprint(awayTeamAbrv + ' => ' + a1Score + "|" + a2Score + "|" + a3Score + "|" + a4Score + "|" + aFinalScore)
-                    pp.pprint(homeTeamAbrv + ' => ' + h1Score + "|" + h2Score + "|" + h3Score + "|" + h4Score + "|" + hFinalScore)
-                    pp.pprint(quarterStatus)
                     pp.pprint("==============================")
             except IndexError:
                 break
-    except Exception as e:
-        # print(e)
-        print("Data cannot be retrieved for this date at the moment")
+    except requests.exceptions.RequestException as e:
+        print(e)
+        # print("Data cannot be retrieved for this date at the moment")
 
 
 def nhlScores(date,league):
