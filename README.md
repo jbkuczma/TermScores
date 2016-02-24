@@ -57,33 +57,33 @@ Retrieve NBA scores from Feburary 23, 2016:
         
         python3 scores.py -nba 2/23/2016
         
-        'Magic vs 76ers'
-        'ORL => 33|34|30|27|124'
-        'PHI => 31|31|31|22|115'
-        'Final'
-        '=============================='
-        'Pelicans vs Wizards'
-        'NOP => 19|32|14|24|89'
-        'WAS => 24|30|31|24|109'
-        'Final'
-        '=============================='
-        'Kings vs Nuggets'
-        'SAC => 28|33|30|23|114'
-        'DEN => 25|25|27|33|110'
-        'Final'
-        '=============================='
-        'Rockets vs Jazz'
-        'HOU => 28|33|30|23|114'
-        'UTA => 25|25|27|33|110'
-        'Final'
-        '=============================='
-        'Nets vs Trail Blazers'
-        'BKN => 21|28|33|22|104'
-        'POR => 34|29|22|27|112'
-        'Final'
-        '=============================='
+          'Magic vs 76ers'
+          'ORL => 33|34|30|27|124'
+          'PHI => 31|31|31|22|115'
+          'Final'
+          '=============================='
+          'Pelicans vs Wizards'
+          'NOP => 19|32|14|24|89'
+          'WAS => 24|30|31|24|109'
+          'Final'
+          '=============================='
+          'Kings vs Nuggets'
+          'SAC => 28|33|30|23|114'
+          'DEN => 25|25|27|33|110'
+          'Final'
+          '=============================='
+          'Rockets vs Jazz'
+          'HOU => 28|33|30|23|114'
+          'UTA => 25|25|27|33|110'
+          'Final'
+          '=============================='
+          'Nets vs Trail Blazers'
+          'BKN => 21|28|33|22|104'
+          'POR => 34|29|22|27|112'
+          'Final'
+          '=============================='
             
-  Also a convenient check what games are playing in the future:
+  Also a convenient check what games are playing later in the season:
         
       python3 scores.py -nhl 3/2/2016
       
@@ -103,7 +103,7 @@ Retrieve NBA scores from Feburary 23, 2016:
         Period: 10:00 PM
         ===================
         
-    scores.py -nba 3/1/2016
+    python3 scores.py -nba 3/1/2016
     
         'Suns vs Hornets'
         'Tipoff at 7:00 pm ET'
