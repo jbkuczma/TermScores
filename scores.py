@@ -218,8 +218,6 @@ def nbaScores(date,league):
                         pp.pprint("==============================")
                 except ValueError as e: #if quarterNumber == ''
                     pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
-                    # pp.pprint(awayTeamAbrv + ' => ' + a1Score + "|" + a2Score + "|" + a3Score + "|" + a4Score + "|" + aFinalScore)
-                    # pp.pprint(homeTeamAbrv + ' => ' + h1Score + "|" + h2Score + "|" + h3Score + "|" + h4Score + "|" + hFinalScore)
                     pp.pprint("Tipoff at " + quarterStatus)
                     pp.pprint("==============================")
             except IndexError:
@@ -264,13 +262,16 @@ def nhlScores(date,league):
                 if awayTeamScore > homeTeamScore:
                     print(colors.bcolors.OKGREEN + awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots) + colors.bcolors.ENDC)
                     print(homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots))
+                    print("Period: " + str(period))
                 elif homeTeamScore > awayTeamScore:
                     print(awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots))
                     print(colors.bcolors.OKGREEN + homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots) + colors.bcolors.ENDC)
+                    print("Period: " + str(period))
                 else:
                     print(awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots))
                     print(homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots))
-                print("Period: " + str(period))
+                    print("Puck drop at " + str(period))
+
                 print("===================")
             except IndexError:
                 break
