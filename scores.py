@@ -203,28 +203,27 @@ def nbaScores(date,league):
                     if int(quarterNumber) == 0:
                         pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
                         pp.pprint("Tipoff at " + quarterStatus)
-                        pp.pprint("==============================")
+                        pp.pprint("=======================")
                     elif int(quarterNumber) >= 1 and int(quarterNumber) <= 3:
                         pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
                         pp.pprint(awayTeamAbrv + ' => ' + a1Score + "|" + a2Score + "|" + a3Score + "|" + a4Score + "|" + aFinalScore)
                         pp.pprint(homeTeamAbrv + ' => ' + h1Score + "|" + h2Score + "|" + h3Score + "|" + h4Score + "|" + hFinalScore)
                         pp.pprint(quarterStatus + ' | ' + gameClock + " remaining")
-                        pp.pprint("==============================")
+                        pp.pprint("=======================")
                     else:
                         pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
                         pp.pprint(awayTeamAbrv + ' => ' + a1Score + "|" + a2Score + "|" + a3Score + "|" + a4Score + "|" + aFinalScore)
                         pp.pprint(homeTeamAbrv + ' => ' + h1Score + "|" + h2Score + "|" + h3Score + "|" + h4Score + "|" + hFinalScore)
                         pp.pprint(quarterStatus)
-                        pp.pprint("==============================")
+                        pp.pprint("=======================")
                 except ValueError as e: #if quarterNumber == ''
                     pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
                     pp.pprint("Tipoff at " + quarterStatus)
-                    pp.pprint("==============================")
+                    pp.pprint("=======================")
             except IndexError:
                 break
     except requests.exceptions.RequestException as e:
         print(e)
-        # print("Data cannot be retrieved for this date at the moment")
 
 
 def nhlScores(date,league):
