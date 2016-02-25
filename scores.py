@@ -269,7 +269,7 @@ def nhlScores(date,league):
                 else:
                     print(awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots))
                     print(homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots))
-                    print("Puck drop at " + str(period))
+                    print("Puck drop at " + str(period) + " ET")
 
                 print("===================")
             except IndexError:
