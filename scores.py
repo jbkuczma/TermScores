@@ -14,6 +14,8 @@ def main():
     if len(sys.argv) > 3:
         parser.print_help()
     elif args.nfl:
+        # http://www.nfl.com/liveupdate/scorestrip/ss.xml
+        # http://www.nfl.com/liveupdate/scorestrip/postseason/ss.xml
         print("You want scores for the NFL")
     elif args.nhl:
         nhlScores(args.nhl,"nhl")
@@ -267,9 +269,14 @@ def nhlScores(date,league):
                     print(colors.bcolors.OKGREEN + homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots) + colors.bcolors.ENDC)
                     print("Period: " + str(period))
                 else:
-                    print(awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots))
-                    print(homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots))
-                    print("Puck drop at " + str(period) + " ET")
+                    if "PM" not in str(period): #game has started but scores are tied 
+                        print(awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots))
+                        print(homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots))
+                        print("Period: " + str(period))
+                    else: #game hasn't started
+                        print(awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots))
+                        print(homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots))
+                        print("Puck drop at " + str(period) + " ET")
 
                 print("===================")
             except IndexError:
