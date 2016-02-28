@@ -1,27 +1,7 @@
-import sys
-import argparse
 import requests
 import pprint
 import json
 import colors
-
-def main():
-    parser = argparse.ArgumentParser("See live scores in your terminal")
-    parser.add_argument("-nfl", action='store_true', help="NFL flag") #action='store_true' allows flag without argument
-    parser.add_argument("-nhl", help="Get game scores for NHL games on given date")
-    parser.add_argument("-nba", help="Get game scores for NBA games on given date") #argument must be in mm/dd/yyyy format
-    args = parser.parse_args()
-    if len(sys.argv) > 3:
-        parser.print_help()
-    elif args.nfl:
-        # http://www.nfl.com/liveupdate/scorestrip/ss.xml
-        # http://www.nfl.com/liveupdate/scorestrip/postseason/ss.xml
-        print("You want scores for the NFL")
-    elif args.nhl:
-        nhlScores(args.nhl,"nhl")
-    elif args.nba:
-        nbaScores(args.nba,"nba")
-
 
 def checkDate(date):
     count = 0
@@ -80,6 +60,7 @@ def makeNHLDate(date): #nhl takes date in a different format. same code as check
         print("The date provided is not valid")
         exit(0)
 
+
 def makeNBADate(date):
     count = 0
     if checkDate(date):
@@ -111,7 +92,7 @@ def makeNBADate(date):
         print("The date provided is not valid")
         exit(0)
 
-def nbaScores(date,league):
+def nbaScores(date):
     try:
         headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0'}
         url = 'http://data.nba.com/data/1h/json/cms/noseason/scoreboard/%s/games.json' % makeNBADate(date)  #date must be yyyymmdd
@@ -228,7 +209,7 @@ def nbaScores(date,league):
         print(e)
 
 
-def nhlScores(date,league):
+def nhlScores(date):
     try:
         headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0'}
         url = "http://live.nhle.com/GameData/GCScoreboard/%s.jsonp" % makeNHLDate(date)
@@ -284,4 +265,3 @@ def nhlScores(date,league):
     except Exception as e:
         print(e)
 
-main()
