@@ -104,6 +104,40 @@ def nbaScores(date):
         # pp.pprint(data['sports_content']['games']['game']) #for testing
         for game in range(0,15):
             try:
+                gameStatus = data['sports_content']['games']['game'][game]['period_time']['game_status'] #1 = hasn't started, 2 = in progressed, 3 = ended
+                gameClock = data['sports_content']['games']['game'][game]['period_time']['game_clock']
+                quarterStatus = data['sports_content']['games']['game'][game]['period_time']['period_status'] #ex: final , 7:00 pm
+                quarterNumber = data['sports_content']['games']['game'][game]['period_time']['period_value']
+                homeTeamCity = data['sports_content']['games']['game'][game]['home']['city']
+                awayTeamCity = data['sports_content']['games']['game'][game]['visitor']['city']
+                homeTeamNickName = data['sports_content']['games']['game'][game]['home']['nickname']
+                awayTeamNickName = data['sports_content']['games']['game'][game]['visitor']['nickname']
+                homeTeamAbrv = data['sports_content']['games']['game'][game]['home']['abbreviation']
+                awayTeamAbrv = data['sports_content']['games']['game'][game]['visitor']['abbreviation']
+                homeScore = data['sports_content']['games']['game'][game]['home']['score']
+                awayScore = data['sports_content']['games']['game'][game]['visitor']['score']
+                if gameStatus == "1" or gameStatus == "3":
+                    output = '{}   {:>3} : {:<3}   {} [{}]'.format(awayTeamAbrv, awayScore, homeScore, homeTeamAbrv, quarterStatus)
+                else:
+                    output = '{}   {:>3} : {:<3}   {} [{}-{} remaining]'.format(awayTeamAbrv, awayScore, homeScore, homeTeamAbrv, quarterStatus, gameClock)
+                print(output)
+            except IndexError:
+                break
+    except requests.exceptions.RequestException as e:
+            print(e)
+
+def nbaQuarterScores(date):
+    try:
+        headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0'}
+        url = 'http://data.nba.com/data/1h/json/cms/noseason/scoreboard/%s/games.json' % makeNBADate(date)  #date must be yyyymmdd
+        response = requests.get(url=url, headers=headers)
+        response.raise_for_status()
+        data = response.text
+        data = json.loads(data)
+        pp = pprint.PrettyPrinter(indent=4)
+        # pp.pprint(data['sports_content']['games']['game']) #for testing
+        for game in range(0,15):
+            try:
                 gameClock = data['sports_content']['games']['game'][game]['period_time']['game_clock']
                 # quarter = data['sports_content']['games']['game'][game]['period_time']['period_name']
                 quarterStatus = data['sports_content']['games']['game'][game]['period_time']['period_status'] #ex: final , 7:00 pm
