@@ -92,7 +92,7 @@ def makeNBADate(date):
         print("The date provided is not valid")
         exit(0)
 
-def nbaScores(date):
+def nbaScores(date): #this will become the overall nba score function. add flag -nbaQ to use the other one and get scores by quarter
     try:
         headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0'}
         url = 'http://data.nba.com/data/1h/json/cms/noseason/scoreboard/%s/games.json' % makeNBADate(date)  #date must be yyyymmdd
