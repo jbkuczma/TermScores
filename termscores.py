@@ -7,6 +7,7 @@ def main():
     parser.add_argument("-nfl", action='store_true', help="NFL flag") #action='store_true' allows flag without argument
     parser.add_argument("-nhl", help="Get game scores for NHL games on given date")
     parser.add_argument("-nba", help="Get game scores for NBA games on given date") #argument must be in mm/dd/yyyy format
+    parser.add_argument("-nbaQ", help="Get game scores per quarter for NBA games on given date")
     args = parser.parse_args()
     if len(sys.argv) > 3:
         parser.print_help()
@@ -18,6 +19,8 @@ def main():
         scores.nhlScores(args.nhl)
     elif args.nba:
         scores.nbaScores(args.nba)
+    elif args.nbaQ:
+        scores.nbaQuarterScores(args.nbaQ)
 
 if __name__ == '__main__':
     main()
