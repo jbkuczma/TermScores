@@ -117,10 +117,9 @@ def nbaScores(date): #this will become the overall nba score function. add flag 
                 homeScore = data['sports_content']['games']['game'][game]['home']['score']
                 awayScore = data['sports_content']['games']['game'][game]['visitor']['score']
                 if gameStatus == "1" or gameStatus == "3" or quarterStatus == "Halftime":
-                    output = '{}   {:>3} : {:<3}   {} [{}]'.format(awayTeamAbrv, awayScore, homeScore, homeTeamAbrv, quarterStatus)
+                    print('{}   {:>3} : {:<3}   {} [{}]'.format(awayTeamAbrv, awayScore, homeScore, homeTeamAbrv, quarterStatus))
                 else:
-                    output = '{}   {:>3} : {:<3}   {} [{}-{} remaining]'.format(awayTeamAbrv, awayScore, homeScore, homeTeamAbrv, quarterStatus, gameClock)
-                print(output)
+                    print('{}   {:>3} : {:<3}   {} [{}-{} remaining]'.format(awayTeamAbrv, awayScore, homeScore, homeTeamAbrv, quarterStatus, gameClock))
             except IndexError:
                 break
     except requests.exceptions.RequestException as e:
@@ -216,27 +215,27 @@ def nbaQuarterScores(date):
                     a3Score = '0'
                     a4Score = '0'
                     aFinalScore = '0'
-                try:
+                try: #print('{}   {:>3} : {:<3}   {} [{}]'.format(awayTeamAbrv, awayScore, homeScore, homeTeamAbrv, quarterStatus))
                     if int(quarterNumber) == 0:
-                        pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
-                        pp.pprint("Tipoff at " + quarterStatus)
-                        pp.pprint("=======================")
+                        print('{} vs {}'.format(awayTeamNickName, homeTeamNickName))
+                        print('Tipoff at {}'.format(quarterStatus))
+                        print("=======================")
                     elif int(quarterNumber) >= 1 and int(quarterNumber) <= 3:
-                        pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
-                        pp.pprint(awayTeamAbrv + ' => ' + a1Score + "|" + a2Score + "|" + a3Score + "|" + a4Score + "|" + aFinalScore)
-                        pp.pprint(homeTeamAbrv + ' => ' + h1Score + "|" + h2Score + "|" + h3Score + "|" + h4Score + "|" + hFinalScore)
-                        pp.pprint(quarterStatus + ' | ' + gameClock + " remaining")
-                        pp.pprint("=======================")
+                        print('{} vs {}'.format(awayTeamNickName, homeTeamNickName))
+                        print('{} => {}|{}|{}|{}|{}'.format(awayTeamAbrv,a1Score,a2Score,a3Score,a4Score,aFinalScore))
+                        print('{} => {}|{}|{}|{}|{}'.format(homeTeamAbrv,h1Score,h2Score,h3Score,h4Score,hFinalScore))
+                        print('{} | {} remaining'.format(quarterStatus,gameClock))
+                        print("=======================")
                     else:
-                        pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
-                        pp.pprint(awayTeamAbrv + ' => ' + a1Score + "|" + a2Score + "|" + a3Score + "|" + a4Score + "|" + aFinalScore)
-                        pp.pprint(homeTeamAbrv + ' => ' + h1Score + "|" + h2Score + "|" + h3Score + "|" + h4Score + "|" + hFinalScore)
-                        pp.pprint(quarterStatus)
+                        print('{} vs {}'.format(awayTeamNickName, homeTeamNickName))
+                        print('{} => {}|{}|{}|{}|{}'.format(awayTeamAbrv,a1Score,a2Score,a3Score,a4Score,aFinalScore))
+                        print('{} => {}|{}|{}|{}|{}'.format(homeTeamAbrv,h1Score,h2Score,h3Score,h4Score,hFinalScore))
+                        print('{}'.format(quarterStatus))
                         pp.pprint("=======================")
                 except ValueError as e: #if quarterNumber == ''
-                    pp.pprint(awayTeamNickName + " vs " + homeTeamNickName)
-                    pp.pprint("Tipoff at " + quarterStatus)
-                    pp.pprint("=======================")
+                    print('{} vs {}'.format(awayTeamNickName, homeTeamNickName))
+                    print('Tipoff at {}'.format(quarterStatus))
+                    print("=======================")
             except IndexError:
                 break
     except requests.exceptions.RequestException as e:
