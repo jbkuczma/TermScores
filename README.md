@@ -2,7 +2,7 @@
 Quickly and easily check NHL, NBA, and NFL scores from your command line.
 
 # Requirements
-    Python3 and requests are required
+    Python3 is required
     
     
 # Usage
