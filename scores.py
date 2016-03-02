@@ -116,7 +116,7 @@ def nbaScores(date): #this will become the overall nba score function. add flag 
                 awayTeamAbrv = data['sports_content']['games']['game'][game]['visitor']['abbreviation']
                 homeScore = data['sports_content']['games']['game'][game]['home']['score']
                 awayScore = data['sports_content']['games']['game'][game]['visitor']['score']
-                if gameStatus == "1" or gameStatus == "3":
+                if gameStatus == "1" or gameStatus == "3" or quarterStatus == "Halftime":
                     output = '{}   {:>3} : {:<3}   {} [{}]'.format(awayTeamAbrv, awayScore, homeScore, homeTeamAbrv, quarterStatus)
                 else:
                     output = '{}   {:>3} : {:<3}   {} [{}-{} remaining]'.format(awayTeamAbrv, awayScore, homeScore, homeTeamAbrv, quarterStatus, gameClock)
