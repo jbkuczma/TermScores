@@ -5,9 +5,11 @@ import scores
 def main():
     parser = argparse.ArgumentParser("See live scores in your terminal")
     parser.add_argument("-nfl", action='store_true', help="NFL flag") #action='store_true' allows flag without argument
-    parser.add_argument("-nhl", help="Get game scores for NHL games on given date")
-    parser.add_argument("-nba", help="Get game scores for NBA games on given date") #argument must be in mm/dd/yyyy format
-    parser.add_argument("-nbaQ", help="Get game scores per quarter for NBA games on given date")
+    parser.add_argument("-nhl", help="Get game scores for NHL games on provided date")
+    parser.add_argument("-nba", help="Get game scores for NBA games on provided date") #argument must be in mm/dd/yyyy format
+    parser.add_argument("-nbaQ", help="Get game scores per quarter for NBA games on provided date")
+    # note: maybe separate the date argument from the league flag, make date its own flag
+    # |-> ex: -nba -d 3/3/2016 ... if -d isn't provided then default to today's date
     args = parser.parse_args()
     if len(sys.argv) > 3:
         parser.print_help()
