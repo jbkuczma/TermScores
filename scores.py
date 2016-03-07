@@ -28,8 +28,8 @@ def checkDate(date):
         return False
     return True
 
-
-def makeNHLDate(date): #nhl takes date in a different format. same code as checkDate() but this returns a string while checkDate(0 returns bool
+#nhl takes date in a different format. same code as checkDate() but this returns a string while checkDate() returns bool
+def makeNHLDate(date):
     count = 0
     if checkDate(date):
         month = ""
@@ -92,10 +92,10 @@ def makeNBADate(date):
         print("The date provided is not valid")
         exit(0)
 
-def nbaScores(date): #this will become the overall nba score function. add flag -nbaQ to use the other one and get scores by quarter
+def nbaScores(date):
     try:
         headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0'}
-        url = 'http://data.nba.com/data/1h/json/cms/noseason/scoreboard/%s/games.json' % makeNBADate(date)  #date must be yyyymmdd
+        url = 'http://data.nba.com/data/1h/json/cms/noseason/scoreboard/%s/games.json' % makeNBADate(date)
         response = requests.get(url=url, headers=headers)
         response.raise_for_status()
         data = response.text
@@ -128,7 +128,7 @@ def nbaScores(date): #this will become the overall nba score function. add flag 
 def nbaQuarterScores(date):
     try:
         headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0'}
-        url = 'http://data.nba.com/data/1h/json/cms/noseason/scoreboard/%s/games.json' % makeNBADate(date)  #date must be yyyymmdd
+        url = 'http://data.nba.com/data/1h/json/cms/noseason/scoreboard/%s/games.json' % makeNBADate(date)
         response = requests.get(url=url, headers=headers)
         response.raise_for_status()
         data = response.text
@@ -138,7 +138,6 @@ def nbaQuarterScores(date):
         for game in range(0,15):
             try:
                 gameClock = data['sports_content']['games']['game'][game]['period_time']['game_clock']
-                # quarter = data['sports_content']['games']['game'][game]['period_time']['period_name']
                 quarterStatus = data['sports_content']['games']['game'][game]['period_time']['period_status'] #ex: final , 7:00 pm
                 quarterNumber = data['sports_content']['games']['game'][game]['period_time']['period_value']
 
@@ -215,7 +214,7 @@ def nbaQuarterScores(date):
                     a3Score = '0'
                     a4Score = '0'
                     aFinalScore = '0'
-                try: #print('{}   {:>3} : {:<3}   {} [{}]'.format(awayTeamAbrv, awayScore, homeScore, homeTeamAbrv, quarterStatus))
+                try:
                     if int(quarterNumber) == 0:
                         print('{} vs {}'.format(awayTeamNickName, homeTeamNickName))
                         print('Tipoff at {}'.format(quarterStatus))
