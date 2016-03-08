@@ -3,6 +3,9 @@ import pprint
 import json
 import colors
 
+def makeGameDict(gamesToAdd, gamesDict):
+    return gamesDict.update(gamesToAdd)
+
 def checkDate(date):
     count = 0
     month = ""
@@ -93,6 +96,7 @@ def makeNBADate(date):
         exit(0)
 
 def nbaScores(date):
+    allGames = {}
     try:
         headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0'}
         url = 'http://data.nba.com/data/1h/json/cms/noseason/scoreboard/%s/games.json' % makeNBADate(date)
@@ -103,6 +107,7 @@ def nbaScores(date):
         pp = pprint.PrettyPrinter(indent=4)
         # pp.pprint(data['sports_content']['games']['game']) #for testing
         for game in range(0,15):
+            gameToAdd = {}
             try:
                 gameStatus = data['sports_content']['games']['game'][game]['period_time']['game_status'] #1 = hasn't started, 2 = in progressed, 3 = ended
                 gameClock = data['sports_content']['games']['game'][game]['period_time']['game_clock']
@@ -116,6 +121,10 @@ def nbaScores(date):
                 awayTeamAbrv = data['sports_content']['games']['game'][game]['visitor']['abbreviation']
                 homeScore = data['sports_content']['games']['game'][game]['home']['score']
                 awayScore = data['sports_content']['games']['game'][game]['visitor']['score']
+                ###
+                gameToAdd = {"away team":awayTeamAbrv,"away team score":awayScore,"home team":homeTeamAbrv,"home team score":homeScore,"status":quarterStatus, "clock": gameClock}
+                makeGameDict(gameToAdd,allGames)
+                ### hopefully storing the data for each game will allow me to have them constantly update
                 if gameStatus == "1" or gameStatus == "3" or quarterStatus == "Halftime":
                     print('{}   {:>3} : {:<3}   {} [{}]'.format(awayTeamAbrv, awayScore, homeScore, homeTeamAbrv, quarterStatus))
                 else:
