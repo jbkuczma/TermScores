@@ -3,8 +3,6 @@ import pprint
 import json
 import colors
 
-def makeGameDict(gamesToAdd, gamesDict):
-    return gamesDict.update(gamesToAdd)
 
 def checkDate(date):
     count = 0
@@ -123,7 +121,7 @@ def nbaScores(date):
                 awayScore = data['sports_content']['games']['game'][game]['visitor']['score']
                 ###
                 gameToAdd = {"away team":awayTeamAbrv,"away team score":awayScore,"home team":homeTeamAbrv,"home team score":homeScore,"status":quarterStatus, "clock": gameClock}
-                makeGameDict(gameToAdd,allGames)
+                allGames[game] = gameToAdd
                 ### hopefully storing the data for each game will allow me to have them constantly update
                 if gameStatus == "1" or gameStatus == "3" or quarterStatus == "Halftime":
                     print('{}   {:>3} : {:<3}   {} [{}]'.format(awayTeamAbrv, awayScore, homeScore, homeTeamAbrv, quarterStatus))
