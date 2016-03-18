@@ -1,7 +1,7 @@
 import requests
 import pprint
 import json
-import colors
+from colorama import Fore, Back, Style
 
 
 def checkDate(date):
@@ -279,14 +279,14 @@ def nhlScores(date):
                         awayTeamShots = 0
                         homeTeamScore = 0
                         awayTeamScore = 0
-                print(colors.bcolors.WARNING + awayTeam + " vs " + homeTeam + colors.bcolors.ENDC)
+                print(Fore.LIGHTYELLOW_EX + awayTeam + " vs " + homeTeam + Style.RESET_ALL)
                 if awayTeamScore > homeTeamScore:
-                    print(colors.bcolors.OKGREEN + awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots) + colors.bcolors.ENDC)
+                    print(Fore.GREEN + awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots) + Style.RESET_ALL)
                     print(homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots))
                     print("Period: " + str(period))
                 elif homeTeamScore > awayTeamScore:
                     print(awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots))
-                    print(colors.bcolors.OKGREEN + homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots) + colors.bcolors.ENDC)
+                    print(Fore.GREEN + homeTeamAbbreviation + " => " + str(homeTeamScore) + "| Shots: " + str(homeTeamShots) + Style.RESET_ALL)
                     print("Period: " + str(period))
                 else:
                     if "PM" not in str(period): #game has started but scores are tied 
