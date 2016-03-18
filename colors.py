@@ -1,4 +1,9 @@
-#look at colorama for cross-platform compatibility
+'''
+now using colorama
+old implementation of this class:
+    print(colors.bcolors.OKGREEN + awayTeamAbbreviation + " => " + str(awayTeamScore) + "| Shots: " + str(awayTeamShots) + colors.bcolors.ENDC)
+    *would print the winning team in green
+'''
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
