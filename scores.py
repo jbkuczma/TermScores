@@ -9,24 +9,28 @@ def checkDate(date):
     month = ""
     day = ""
     year = ""
-    for c in date:
-        if count == 0:
-            if c == '/':
-                count+=1
-            else:
-                month+=c
-        elif count == 1:
-            if c == '/':
-                count+=1
-            else:
-                day+=c
-        elif count == 2:
-            if c == '/':
-                count+=1
-            else:
-                year+=c
-    if count > 2 or int(month) > 12 or int(month) < 1 or int(day) < 1 or int(day) > 31 or int(year) < 1947: #unsure about year cutoff. this seems to be as far back as possible (for nba)
-        return False
+    try:
+        for c in date:
+            if count == 0:
+                if c == '/':
+                    count+=1
+                else:
+                    month+=c
+            elif count == 1:
+                if c == '/':
+                    count+=1
+                else:
+                    day+=c
+            elif count == 2:
+                if c == '/':
+                    count+=1
+                else:
+                    year+=c
+        if count > 2 or int(month) > 12 or int(month) < 1 or int(day) < 1 or int(day) > 31 or int(year) < 1947: #unsure about year cutoff. this seems to be as far back as possible (for nba)
+            return False
+    except ValueError:
+        print("Date provided is not valid. Proper format is MM/DD/YYYY")
+        exit()
     return True
 
 #nhl takes date in a different format. same code as checkDate() but this returns a string while checkDate() returns bool
